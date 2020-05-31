@@ -50,6 +50,7 @@ suite('Functional Tests', function () {
         .end((err, res) => {
           const { likes } = res.body
           chai.request(server)
+            .get('/api/stock-prices')
             .query({ stock: 'goog', like: true })
             .end((err, res) => {
               assert.equal(res.status, 200)
