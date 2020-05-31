@@ -45,8 +45,8 @@ const getData = async (stock) => {
       }
     })
     const results = await Promise.all(stocks)
-    const diff = Math.abs(results[0].likes - results[1].likes)
-    return results.map(stock => ({ ...stock, rel_likes: diff }))
+    return [{ ...results[0], rel_likes: results[0].likes - results[1].likes },
+    { ...results[1], rel_likes: results[1].likes - results[0].likes }]
   } else {
     const results = await Promise.all([getPrice(stock), getLikes(stock)])
     return { stock, price: results[0], likes: results[1] }
